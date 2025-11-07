@@ -1,0 +1,10 @@
+steps:
+  - identifier: _chanina.list_features
+    args:
+    flow_type: chain
+  
+instances:
+  _chanina.list_features:
+    - hello: world
+    - hello: world
+    - hello: world
