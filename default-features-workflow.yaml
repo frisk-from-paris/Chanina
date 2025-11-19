@@ -2,6 +2,7 @@ steps:
   - identifier: _chanina.list_features
     args:
     flow_type: chain
+    flow_id: chain_1
   
 instances:
   _chanina.list_features:

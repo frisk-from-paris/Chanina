@@ -7,60 +7,47 @@ from celery import chain, group
 class Sequencer:
     """ The sequencer is maintaining the current sequence being bootstrapped. """
     def __init__(self) -> None:
-        self.init()
-
-    def init(self):
-        self.chain_tasks = []
-        self.group_tasks = []
-        self.current_sequence = []
         self.registry = {}
         self._sequence = None
-        self.previous_flow_type = None
+        self.tasks_by_flow_id = {"default.chain": [], "default.group": []}
 
     @property
     def sequence(self):
         return self._sequence
 
     def add(self, step: dict, feature: Feature, args: dict = {}):
+        """
+        To add the step to the sequence, we need to check its content: 
+            - identifier needs to be unique
+            - flow_type needs to be group or chain
+            - flow_id if unspecified will be default.{flow_type}, else it will be on its own key in the register.
+        Steps are added in the order they are written in the yaml file, depending on their own flow_id.
+        """
+        args = args
         name = step["identifier"]
         flow_type = step["flow_type"]
-        args = args
+        if not flow_type in ["chain", "group"]:
+            raise ValueError(f"'{flow_type}' is not a valid flow_type.")
 
-        # flush if changing flow_type
-        if self.previous_flow_type and flow_type != self.previous_flow_type:
-            if self.previous_flow_type == "chain" and self.chain_tasks:
-                self.current_sequence.append(chain(self.chain_tasks.copy()))
-                self.chain_tasks = []
-            elif self.previous_flow_type == "group" and self.group_tasks:
-                self.current_sequence.append(group(self.group_tasks.copy()))
-                self.group_tasks = []
+        flow_id = step.get("flow_id", None)
+        flow_id = f"{flow_id}.{flow_type}" if flow_id else f"default.{flow_type}"
 
-        # add task to its list
         task = feature.task.s(args=args)
-
-        if flow_type == "chain":
-            self.chain_tasks.append(task)
-        elif flow_type == "group":
-            self.group_tasks.append(task)
-        else:
-            raise Exception(f"{flow_type} unrecognized flow_type.")
-        
+        self.tasks_by_flow_id.setdefault(flow_id, [])
+        self.tasks_by_flow_id[flow_id].append(task)
         self.registry[name] = task
-        self.previous_flow_type = flow_type
 
-    def flush(self):
-        """ When the sequence has been built, flushing it means adding the reminder tasks
-        to the current_sequence. """
-        if self.chain_tasks:
-            self.current_sequence.append(chain(self.chain_tasks.copy()))
-            self.chain_tasks = []
-        if self.group_tasks:
-            self.current_sequence.append(group(self.group_tasks.copy()))
-            self.group_tasks = []
-        self._sequence = tuple(self.current_sequence)
-
-    def __repr__(self) -> str:
-        return f"Sequencer<Chain{self.chain_tasks}, Group{self.group_tasks}, CurrentSequence{self.current_sequence}>"
+    def build(self):
+        """
+        Builds the sequence.
+        """
+        sequence = []
+        for flow, tasks in self.tasks_by_flow_id.items():
+            if flow.split(".")[1] == "group":
+                sequence.append(group(tasks))
+            elif flow.split(".")[1] == "chain":
+                sequence.append(chain(tasks))
+        self._sequence = sequence
 
 
 class Bootstrapper:
@@ -99,6 +86,7 @@ class Bootstrapper:
         """
         if self.built:
             raise Exception("You cannot build a Bootstrapper more than once.")
+
         for step in self.workflow["steps"]:
             feature = self.features.get(step["identifier"])
             if not feature:
@@ -110,11 +98,11 @@ class Bootstrapper:
                 for args in self.workflow["instances"][step["identifier"]]:
                     # 'instances' are dicts of args with which we re-run the task.
                     args.update(initial_args)
-                    self._sequencer.add(step, feature, args)
+                    self.sequencer.add(step, feature, args)
             # Otherwise we build the task here.
             else:
                 # 'step' is passed as 'args' cause it does contain the args at the key 'args'.
                 all_args = step.get("args", {})
-                self._sequencer.add(step, feature, all_args)
-        self._sequencer.flush()
+                self.sequencer.add(step, feature, all_args)
+        self.sequencer.build()
         self._built = True

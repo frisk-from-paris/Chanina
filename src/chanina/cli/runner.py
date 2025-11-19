@@ -159,25 +159,18 @@ class Runner:
     def _run_task(self):
         feature = self.app.features[self.task_identifier]
         task = feature.task.s(args=self.additionnal_args)
-        self._last_task_ids.append(task.apply_async())
+        task.apply_async()
 
     def _run_workflow(self):
         if not self.bootstrapper:
             raise Exception("Failed to run because no Bootstrapper was initialized.")
         self.bootstrapper.build()
-        if not self.bootstrapper._built or not self.bootstrapper.sequence:
+        if not self.bootstrapper.built or not self.bootstrapper.sequence:
             raise Exception("Can't run a sequence that the bootstrapper did not build.")
 
         for _ in range(self.number_of_runs):
-            if self.task_identifier in self.bootstrapper.sequencer.registry:
-                task = self.bootstrapper.sequencer.registry[self.task_identifier]
-                task.kwargs["args"].update(self.additionnal_args)
-                self._last_task_ids.append(
-                    task.apply_async()
-                )
-            else:
-                for sequence in self.bootstrapper.sequence:
-                    self._last_task_ids.append(sequence.apply_async())
+            for sequence in self.bootstrapper.sequence:
+                sequence.apply_async()
 
 
 def run_celery(app: Celery,command: str = "worker", **options):
@@ -217,7 +210,6 @@ def run():
         args = import_arguments(celery_args)
         run_celery(app.celery, **args)
         return
-
 
     # Transform arguments data into the needed components for the run.
     arguments = import_arguments(arguments_as_list)
