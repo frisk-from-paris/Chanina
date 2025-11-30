@@ -4,6 +4,7 @@ functions do not return anything but make the current_page to the desired state.
 from typing import Literal
 
 import logging
+
 from chanina.tools._meta_tools import normalize_url
 
 
@@ -46,9 +47,7 @@ class Navigate:
         self,
         scroller_depth: int = 0,
         axis: Literal['y', 'x'] = 'y',
-        reload_timeout: int = 2000,
-        max_reload: int = 0,
-        cond: dict = {},
+        timeout: int = 2000,
         speed: int = 50
     ) -> None:
         """
@@ -58,12 +57,11 @@ class Navigate:
             - scroller_depth (int): which depth should the scrollbar be at, 0 being the full doc, 1 the first
                                     scrollable container inside the full doc, 2 the second ... etc.
             - axis (Literal['y', 'x']): scrolling axis.
-            - reload_timeout (int): for dynamically generated content.
+            - timeout (int): for dynamically generated content.
                     If a value is set, waits 'reload_timeout' ms and check if scroll_bar is still maxed.
-            - max_reload (int): maximum reloading allowed. -1 is for reload until finished.
-            - attribute (str): which attribute to match the scroll_bar.
         """
         page = self.session.get_current_page()
+        print(page)
 
         scrollables = page.query_selector_all("*")
         handles = []
@@ -101,24 +99,13 @@ class Navigate:
         if scroll_size <= client_size:
             logging.warning(f"'{el}' does not have a scroll bar.")
     
-        reload_count = 0
-    
         while True:
-            if cond.get("stop"):
-                break
             page.evaluate(f"(el) => el.{axis_scroll} += {speed}", el)
             current_pos = get_scroll_pos()
-    
             if current_pos == previous_pos:
-                if reload_timeout == 0:
-                    break
-                page.wait_for_timeout(reload_timeout)
+                page.wait_for_timeout(timeout)
                 page.evaluate(f"(el) => el.{axis_scroll} += 50", el)
                 current_pos = get_scroll_pos()
                 if current_pos == previous_pos:
-                    reload_count += 1
-                    if max_reload != -1 and reload_count >= max_reload:
-                        break
-                    else:
-                        continue
+                    break
             previous_pos = current_pos

@@ -186,6 +186,7 @@ def run_celery(app: Celery,command: str = "worker", **options):
         else:
             argv.append(f"--{k}={v}")
 
+    print(argv)
     app.start(argv)
 
 

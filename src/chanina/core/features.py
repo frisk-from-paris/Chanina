@@ -6,7 +6,7 @@ import celery
 class ChaninaTask(celery.Task):
     """
     Base class for Tasks used by the Chanina app.
-    This class is meant to be inherited from for user's implementation of specific
+    This class is meant to be inherited by the user's implementation of specific
     base Tasks.
     """
     ...

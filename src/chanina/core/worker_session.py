@@ -108,7 +108,7 @@ class WorkerSession:
 
     def close_page(self) -> None:
         """ Close the 'current_page'."""
-        self.get_current_page().close()
+        self.current_page.close()
         self._current_page = None
 
     def close(self) -> None:

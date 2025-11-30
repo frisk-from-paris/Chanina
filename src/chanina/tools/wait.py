@@ -1,5 +1,7 @@
 import time
 
+from chanina.core.errors import BrowsingTimeoutException
+
 
 class Wait:
     def __init__(self, session) -> None:
@@ -18,7 +20,7 @@ class Wait:
             if any(c.get(key) == value for c in cookies):
                 return True
             self.session.get_current_page().wait_for_timeout(100)
-        raise TimeoutError("Timed out waiting for cookies.")
+        raise BrowsingTimeoutException("Timed out waiting for cookies.")
 
     def wait_for_dom_element(
         self,
@@ -32,7 +34,7 @@ class Wait:
             if page.query_selector(selector):
                 return True
             page.wait_for_timeout(100)
-        raise TimeoutError(f"Timed out waiting for element '{selector}'.")
+        raise BrowsingTimeoutException(f"Timed out waiting for element '{selector}'.")
 
     def wait_for_js_condition(
         self,
@@ -46,4 +48,4 @@ class Wait:
             if page.evaluate(script):
                 return True
             page.wait_for_timeout(100)
-        raise TimeoutError(f"Timed out waiting for JS condition: {script}")
+        raise BrowsingTimeoutException(f"Timed out waiting for JS condition: {script}")
