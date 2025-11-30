@@ -39,9 +39,9 @@ def build_default_features(app):
     There are generic useful features that can be implemented, it must
     be implemented here, and the app needs to be the user's app instance.
 
-    The prefix '_chanina.*' is a reserved string for identifiers of internal
+    The prefix 'chanina.*' is a reserved string for identifiers of internal
     tasks.
     """
-    app.feature("_chanina.list_features")(chanina_list_features)
-    app.feature("_chanina.close_page")(chanina_close_page)
-    app.feature("_chanina.new_page")(chanina_new_page)
+    app.feature("chanina.list_features")(chanina_list_features)
+    app.feature("chanina.close_page")(chanina_close_page)
+    app.feature("chanina.new_page")(chanina_new_page)

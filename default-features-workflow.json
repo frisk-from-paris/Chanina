@@ -1,24 +1,24 @@
 {
   "steps": [
     {
-      "identifier": "_chanina.list_features",
+      "identifier": "chanina.list_features",
       "args": {},
       "flow_type": "chain"
     },
     {
-      "identifier": "_chanina.new_page",
+      "identifier": "chanina.new_page",
       "args": {},
       "flow_type": "chain"
     },
     {
-      "identifier": "_chanina.close_page",
+      "identifier": "chanina.close_page",
       "args": {},
       "flow_type": "chain"
     }
 
   ],
   "instances": {
-    "_chanina.list_features": [
+    "chanina.list_features": [
       {
       },
       {
