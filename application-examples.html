@@ -58,7 +58,6 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Application</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#declaring-an-app">Declaring an app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#profile-handling">Profile handling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#worker-specificities">Worker specificities</a></li>
 </ul>
 </li>
@@ -125,20 +124,43 @@
 
 </pre></div>
 </div>
-<p><em>Running the celery worker …</em></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>celery<span class="w"> </span>-A<span class="w"> </span>app:celery<span class="w"> </span>worker
+<p><em>Running the worker …</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>chanina<span class="w"> </span>-a<span class="w"> </span>path_to_app:app
 </pre></div>
 </div>
 <p><em>Running a default feature as a single task.</em></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>poetry<span class="w"> </span>run<span class="w"> </span>cli<span class="w"> </span>-a<span class="w"> </span>app:app<span class="w"> </span>--task<span class="w"> </span>_chanina.list_features
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>chanina<span class="w"> </span>-a<span class="w"> </span>path_to_app:app<span class="w"> </span>--task<span class="w"> </span>chanina.list_features
 </pre></div>
 </div>
-</section>
-<section id="profile-handling">
-<h2>Profile handling<a class="headerlink" href="#profile-handling" title="Link to this heading"></a></h2>
+<p><em>Write a workflow.</em></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">     </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">is_element_clickable</span>
+<span class="w">     </span><span class="nt">flow_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">chain</span>
+<span class="w">     </span><span class="nt">flow_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">html_elements</span>
+
+<span class="nt">instances</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">is_element_clickable</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">link</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://recette.xmco.fr</span>
+<span class="w">      </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">page_1</span>
+<span class="w">      </span><span class="nt">element</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">button</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">link</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://recette.xmco.fr</span>
+<span class="w">      </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">page_2</span>
+<span class="w">      </span><span class="nt">element</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">div</span>
+<span class="w">      </span><span class="nt">class</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bootstrap-menu-item</span>
+</pre></div>
+</div>
+<p>This yaml file is a workflow. The ‘steps’ is the declarative section of the file. And the ‘instances’ is individual instances of a task
+that will be created for one step.</p>
+<p><em>Run the workflow</em></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>chanina<span class="w"> </span>-a<span class="w"> </span>path_to_app:app<span class="w"> </span>my-workflow.yaml
+</pre></div>
+</div>
+<p>This command will now sends 2 instances of the ‘is_element_clickable’ feature to the broker.</p>
 </section>
 <section id="worker-specificities">
 <h2>Worker specificities<a class="headerlink" href="#worker-specificities" title="Link to this heading"></a></h2>
+<p>The Chanina worker is a Celery worker wrapped and safely injected with a WorkerSession object.</p>
 </section>
 </section>
 
