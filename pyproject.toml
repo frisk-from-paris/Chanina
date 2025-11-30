@@ -1,6 +1,6 @@
 [project]
 name = "chanina"
-version = "0.1.1"
+version = "0.2.0"
 description = " Chanina is a Python application to automate and orchestrate Playwright sessions using a Celery-based task system. "
 authors = [
     {name = "Leo Hehlen",email = "leo.hehlen@pc-rtx.com"}
