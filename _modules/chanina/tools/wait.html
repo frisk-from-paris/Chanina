@@ -84,6 +84,8 @@
   <h1>Source code for chanina.tools.wait</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">chanina.core.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">BrowsingTimeoutException</span>
+
 
 <div class="viewcode-block" id="Wait">
 <a class="viewcode-back" href="../../../tools.html#chanina.tools.wait.Wait">[docs]</a>
@@ -106,7 +108,7 @@
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cookies</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get_current_page</span><span class="p">()</span><span class="o">.</span><span class="n">wait_for_timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="s2">&quot;Timed out waiting for cookies.&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="n">BrowsingTimeoutException</span><span class="p">(</span><span class="s2">&quot;Timed out waiting for cookies.&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Wait.wait_for_dom_element">
@@ -123,7 +125,7 @@
             <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">query_selector</span><span class="p">(</span><span class="n">selector</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="n">page</span><span class="o">.</span><span class="n">wait_for_timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timed out waiting for element &#39;</span><span class="si">{</span><span class="n">selector</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="n">BrowsingTimeoutException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timed out waiting for element &#39;</span><span class="si">{</span><span class="n">selector</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Wait.wait_for_js_condition">
@@ -140,7 +142,7 @@
             <span class="k">if</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">script</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="n">page</span><span class="o">.</span><span class="n">wait_for_timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timed out waiting for JS condition: </span><span class="si">{</span><span class="n">script</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="n">BrowsingTimeoutException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Timed out waiting for JS condition: </span><span class="si">{</span><span class="n">script</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 </div>
 
 </pre></div>

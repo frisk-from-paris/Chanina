@@ -202,7 +202,7 @@
 <a class="viewcode-back" href="../../../core.html#chanina.core.worker_session.WorkerSession.close_page">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close_page</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Close the &#39;current_page&#39;.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">get_current_page</span><span class="p">()</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span> <span class="o">=</span> <span class="kc">None</span></div>
 
 
