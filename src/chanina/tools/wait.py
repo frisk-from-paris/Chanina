@@ -19,7 +19,7 @@ class Wait:
             cookies = self.session.browser_context.cookies()
             if any(c.get(key) == value for c in cookies):
                 return True
-            self.session.get_current_page().wait_for_timeout(100)
+            self.session.current_page.wait_for_timeout(100)
         raise BrowsingTimeoutException("Timed out waiting for cookies.")
 
     def wait_for_dom_element(

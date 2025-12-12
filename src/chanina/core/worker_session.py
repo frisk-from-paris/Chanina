@@ -92,14 +92,14 @@ class WorkerSession:
         self.interact = interact.Interact(self)
         self.wait = wait.Wait(self)
 
-    def get_current_page(self, required: bool = True) -> Page:
+    def get_current_page(self, required: bool = False) -> Page:
         """
         Return the current_page.
-        If required is True (default), raises an exception if current_page is None
+        If required is True, raises an exception if current_page is None
         """
         if required and not self._current_page:
             raise Exception("Trying to access the current_page that doesn't exist.")
-        return self.current_page if self.current_page else Page({}) # Linter is pissing me off
+        return self.current_page if self.current_page else self.new_page() # Linter is pissing me off
 
     def new_page(self) -> Page:
         """ Create a new page, overrides the '_current_page'. """

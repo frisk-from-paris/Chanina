@@ -186,7 +186,7 @@ def run_celery(app: Celery,command: str = "worker", **options):
         else:
             argv.append(f"--{k}={v}")
 
-    print(argv)
+    argv.append("--concurrency=1")
     app.start(argv)
 
 
@@ -195,7 +195,6 @@ def run():
     argparser = ArgumentParser()
     add_arguments(argparser)
     args = argparser.parse_args()
-    print(args)
 
     app_path = args.app
     app = import_application_object(app_path)

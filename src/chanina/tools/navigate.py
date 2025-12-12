@@ -48,7 +48,8 @@ class Navigate:
         scroller_depth: int = 0,
         axis: Literal['y', 'x'] = 'y',
         timeout: int = 2000,
-        speed: int = 50
+        speed: int = 50,
+        max_scrolls: int = 0
     ) -> None:
         """
         scroll all the way down a scroll bar.
@@ -60,7 +61,8 @@ class Navigate:
             - timeout (int): for dynamically generated content.
                     If a value is set, waits 'reload_timeout' ms and check if scroll_bar is still maxed.
         """
-        page = self.session.get_current_page()
+        print("inside scroller")
+        page = self.session.current_page
         print(page)
 
         scrollables = page.query_selector_all("*")
@@ -99,7 +101,10 @@ class Navigate:
         if scroll_size <= client_size:
             logging.warning(f"'{el}' does not have a scroll bar.")
     
-        while True:
+        scrolls_count = 1
+        condition = lambda c: c <= max_scrolls if max_scrolls else True
+
+        while condition(scrolls_count):
             page.evaluate(f"(el) => el.{axis_scroll} += {speed}", el)
             current_pos = get_scroll_pos()
             if current_pos == previous_pos:
@@ -109,3 +114,4 @@ class Navigate:
                 if current_pos == previous_pos:
                     break
             previous_pos = current_pos
+            scrolls_count += 1
