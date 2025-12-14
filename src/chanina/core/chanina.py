@@ -65,6 +65,8 @@ class ChaninaApplication:
         caller_path: str,
         backend: str,
         broker: str,
+        redis_host: str,
+        redis_port: int,
         user_profile_path: str = "",
         headless: bool = False,
         browser_name: str = "firefox",
@@ -76,7 +78,7 @@ class ChaninaApplication:
         self.worker_session = None
         self.features = {}
 
-        self.redis = Redis()
+        self.redis = Redis(host=redis_host, port=redis_port)
         self.redlock = f"lock:{caller_path}"
         self.celery = Celery("chanina", broker=broker, backend=backend)
 
