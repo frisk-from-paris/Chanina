@@ -107,7 +107,7 @@
             <span class="n">cookies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">browser_context</span><span class="o">.</span><span class="n">cookies</span><span class="p">()</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="n">value</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cookies</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">True</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get_current_page</span><span class="p">()</span><span class="o">.</span><span class="n">wait_for_timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">current_page</span><span class="o">.</span><span class="n">wait_for_timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
         <span class="k">raise</span> <span class="n">BrowsingTimeoutException</span><span class="p">(</span><span class="s2">&quot;Timed out waiting for cookies.&quot;</span><span class="p">)</span></div>
 
 
