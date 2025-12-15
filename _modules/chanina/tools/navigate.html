@@ -150,11 +150,9 @@
 <span class="sd">                                    scrollable container inside the full doc, 2 the second ... etc.</span>
 <span class="sd">            - axis (Literal[&#39;y&#39;, &#39;x&#39;]): scrolling axis.</span>
 <span class="sd">            - timeout (int): for dynamically generated content.</span>
-<span class="sd">                    If a value is set, waits &#39;reload_timeout&#39; ms and check if scroll_bar is still maxed.</span>
+<span class="sd">                             If a value is set, waits &#39;reload_timeout&#39; ms and check if scroll_bar is still maxed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inside scroller&quot;</span><span class="p">)</span>
         <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">current_page</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
 
         <span class="n">scrollables</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">query_selector_all</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
         <span class="n">handles</span> <span class="o">=</span> <span class="p">[]</span>
@@ -170,9 +168,11 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">is_scrollable</span><span class="p">:</span>
                 <span class="n">handles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">el</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">el</span> <span class="o">=</span> <span class="n">handles</span><span class="p">[</span><span class="n">scroller_depth</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="n">el</span> <span class="o">=</span> <span class="n">handles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="n">el</span> <span class="o">=</span> <span class="n">handles</span><span class="p">[</span><span class="n">scroller_depth</span><span class="p">]</span>
-    
         <span class="k">def</span><span class="w"> </span><span class="nf">get_scroll_pos</span><span class="p">():</span>
             <span class="k">return</span> <span class="n">page</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(el) =&gt; el.</span><span class="si">{</span><span class="n">axis_scroll</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span>
     
