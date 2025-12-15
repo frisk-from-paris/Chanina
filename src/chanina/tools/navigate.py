@@ -59,11 +59,9 @@ class Navigate:
                                     scrollable container inside the full doc, 2 the second ... etc.
             - axis (Literal['y', 'x']): scrolling axis.
             - timeout (int): for dynamically generated content.
-                    If a value is set, waits 'reload_timeout' ms and check if scroll_bar is still maxed.
+                             If a value is set, waits 'reload_timeout' ms and check if scroll_bar is still maxed.
         """
-        print("inside scroller")
         page = self.session.current_page
-        print(page)
 
         scrollables = page.query_selector_all("*")
         handles = []
@@ -79,9 +77,11 @@ class Navigate:
             )
             if is_scrollable:
                 handles.append(el)
+        try:
+            el = handles[scroller_depth]
+        except IndexError:
+            el = handles[0]
 
-        el = handles[scroller_depth]
-    
         def get_scroll_pos():
             return page.evaluate(f"(el) => el.{axis_scroll}", el)
     
