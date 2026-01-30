@@ -71,12 +71,6 @@ class Filters:
     
         if filtered:
             found = filtered[0]
-    
-        if not found:
-            raise Exception(
-                f"Couldn't find a selector '{selector}' with '{text_content}' in {attr}"
-            )
-    
         return found
 
     def find_all_by_attr(self, selector: str, attr: str, text_content: str) -> list[Locator]:
@@ -95,10 +89,5 @@ class Filters:
             attr=attr,
             value=text_content
         )
-    
-        if not filtered:
-            raise Exception(
-                f"Couldn't find a selector '{selector}' with '{text_content}' in {attr}"
-            )
     
         return filtered
