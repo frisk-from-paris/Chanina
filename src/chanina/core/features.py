@@ -38,6 +38,6 @@ class Feature:
             **self.celery_kwargs
         )
         def _task(*args, **kwargs):
-            args = () if None in args else ()
+            args = () if None in args else args
             return self.func(*args, self.app.worker_session, kwargs.get("args"))
         return _task

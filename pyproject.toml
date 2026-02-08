@@ -1,6 +1,6 @@
 [project]
 name = "chanina"
-version = "0.2.1"
+version = "0.2.2"
 description = " Chanina is a Python application to automate and orchestrate Playwright sessions using a Celery-based task system. "
 authors = [
     {name = "Leo Hehlen",email = "leo.hehlen@pc-rtx.com"}
@@ -17,6 +17,7 @@ dependencies = [
     "celery (>=5.5.3,<6.0.0)",
     "redis (>=6.4.0,<7.0.0)",
     "uvicorn (>=0.38.0,<0.39.0)",
+    "twine (>=6.2.0,<7.0.0)",
 ]
 
 [tool.poetry]
