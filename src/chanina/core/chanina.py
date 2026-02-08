@@ -81,7 +81,8 @@ class ChaninaApplication:
 
         self.redis = Redis(host=redis_host, port=redis_port)
         self.redlock = f"lock:{caller_path}"
-        self.celery = Celery("chanina", broker=broker, backend=backend, **celery_config)
+        self.celery = Celery("chanina", broker=broker, backend=backend)
+        self.celery.config_from_object(celery_config)
 
         self._caller_path = caller_path
         self._headless = headless
