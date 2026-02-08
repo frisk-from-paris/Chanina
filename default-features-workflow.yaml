@@ -1,6 +1,6 @@
 steps:
   - identifier: _chanina.list_features
-    args:
+    config:
     flow_type: chain
     flow_id: chain_1
   

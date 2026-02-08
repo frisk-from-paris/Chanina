@@ -1,8 +1,5 @@
 import os
-from typing import Optional
-
 import logging
-from chanina.tools import inspect, interact, navigate, filters, wait
 
 from playwright.sync_api import Page, Playwright, sync_playwright
 
@@ -28,7 +25,6 @@ class WorkerSession:
         logging.info(f"Running playwright from dir : '{caller_path}'")
         self._pw = sync_playwright().start()
 
-        self._current_page = None
         self._browser_name = browser_name
         self._profile = profile
         self._headless = headless
@@ -38,15 +34,8 @@ class WorkerSession:
 
         self._init_context()
 
-        # Those attributes will be populated by the _init_tools method.
-        self.navigate: navigate.Navigate 
-        self.filters : filters.Filters
-        self.inspect: inspect.Inspect
-        self.interact: interact.Interact
-        self.wait: wait.Wait
-
-        # Initializes the tools.
-        self._init_tools()
+        # Local context to use inside a task.
+        self.user_context = {}
 
         logging.info("Initialized")
 
@@ -54,11 +43,6 @@ class WorkerSession:
     def playwright(self) -> Playwright:
         """ Return playwright context. """
         return self._pw
-
-    @property
-    def current_page(self) -> Optional[Page]:
-        """ Return the last created page. """
-        return self._current_page
 
     def _init_context(self) -> None:
         """
@@ -81,35 +65,9 @@ class WorkerSession:
         else:
             raise ValueError("Browser must be 'firefox' or 'chrome'")
 
-    def _init_tools(self) -> None:
-        """
-        For ease of developpment, usage and maintaining, tools are objects that performs
-        cool operations inside the current_context, alway on the current page.
-        """
-        self.navigate = navigate.Navigate(self)
-        self.filters = filters.Filters(self)
-        self.inspect = inspect.Inspect(self)
-        self.interact = interact.Interact(self)
-        self.wait = wait.Wait(self)
-
-    def get_current_page(self, required: bool = False) -> Page:
-        """
-        Return the current_page.
-        If required is True, raises an exception if current_page is None
-        """
-        if required and not self._current_page:
-            raise Exception("Trying to access the current_page that doesn't exist.")
-        return self.current_page if self.current_page else self.new_page() # Linter is pissing me off
-
-    def new_page(self) -> Page:
+    def new_page(self, args: dict = {}) -> Page:
         """ Create a new page, overrides the '_current_page'. """
-        self._current_page = self.browser_context.new_page()
-        return self._current_page
-
-    def close_page(self) -> None:
-        """ Close the 'current_page'."""
-        self.current_page.close()
-        self._current_page = None
+        return self.browser_context.new_page(**args)
 
     def close(self) -> None:
         """ Close the context. """

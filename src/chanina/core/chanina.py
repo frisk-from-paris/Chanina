@@ -70,6 +70,7 @@ class ChaninaApplication:
         user_profile_path: str = "",
         headless: bool = False,
         browser_name: str = "firefox",
+        celery_config: dict = {}
     ) -> None:
         # Inside the celery worker process the __file__ might be dir.module
         caller_path = str(Path(caller_path).resolve().parent)
@@ -80,7 +81,7 @@ class ChaninaApplication:
 
         self.redis = Redis(host=redis_host, port=redis_port)
         self.redlock = f"lock:{caller_path}"
-        self.celery = Celery("chanina", broker=broker, backend=backend)
+        self.celery = Celery("chanina", broker=broker, backend=backend, **celery_config)
 
         self._caller_path = caller_path
         self._headless = headless
@@ -100,7 +101,7 @@ class ChaninaApplication:
         a time is handling the file system.
         """
         with self.redis.lock(self.redlock,timeout=30, blocking_timeout=45):
-            logging.warning("Locking to start the session ...")
+            logging.info("Locking to start the session ...")
             profile = self._user_profile_path
             if profile:
                 self._in_use_profile_path = init_profile(profile)
