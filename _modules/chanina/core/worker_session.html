@@ -83,10 +83,7 @@
              
   <h1>Source code for chanina.core.worker_session</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-
 <span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">chanina.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">inspect</span><span class="p">,</span> <span class="n">interact</span><span class="p">,</span> <span class="n">navigate</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">wait</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">playwright.sync_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Page</span><span class="p">,</span> <span class="n">Playwright</span><span class="p">,</span> <span class="n">sync_playwright</span>
 
@@ -114,7 +111,6 @@
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running playwright from dir : &#39;</span><span class="si">{</span><span class="n">caller_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pw</span> <span class="o">=</span> <span class="n">sync_playwright</span><span class="p">()</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_browser_name</span> <span class="o">=</span> <span class="n">browser_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_profile</span> <span class="o">=</span> <span class="n">profile</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_headless</span> <span class="o">=</span> <span class="n">headless</span>
@@ -124,15 +120,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_context</span><span class="p">()</span>
 
-        <span class="c1"># Those attributes will be populated by the _init_tools method.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">navigate</span><span class="p">:</span> <span class="n">navigate</span><span class="o">.</span><span class="n">Navigate</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="p">:</span> <span class="n">filters</span><span class="o">.</span><span class="n">Filters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inspect</span><span class="p">:</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Inspect</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">interact</span><span class="p">:</span> <span class="n">interact</span><span class="o">.</span><span class="n">Interact</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span><span class="p">:</span> <span class="n">wait</span><span class="o">.</span><span class="n">Wait</span>
-
-        <span class="c1"># Initializes the tools.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_tools</span><span class="p">()</span>
+        <span class="c1"># Local context to use inside a task.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_context</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Initialized&quot;</span><span class="p">)</span>
 
@@ -140,11 +129,6 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">playwright</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Playwright</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Return playwright context. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pw</span>
-
-    <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Page</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return the last created page. &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_init_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -167,43 +151,11 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Browser must be &#39;firefox&#39; or &#39;chrome&#39;&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_init_tools</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        For ease of developpment, usage and maintaining, tools are objects that performs</span>
-<span class="sd">        cool operations inside the current_context, alway on the current page.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">navigate</span> <span class="o">=</span> <span class="n">navigate</span><span class="o">.</span><span class="n">Navigate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">filters</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">Filters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inspect</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">Inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">interact</span> <span class="o">=</span> <span class="n">interact</span><span class="o">.</span><span class="n">Interact</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wait</span> <span class="o">=</span> <span class="n">wait</span><span class="o">.</span><span class="n">Wait</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-<div class="viewcode-block" id="WorkerSession.get_current_page">
-<a class="viewcode-back" href="../../../core.html#chanina.core.worker_session.WorkerSession.get_current_page">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_current_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">required</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Page</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return the current_page.</span>
-<span class="sd">        If required is True, raises an exception if current_page is None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">required</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Trying to access the current_page that doesn&#39;t exist.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span> <span class="c1"># Linter is pissing me off</span></div>
-
-
 <div class="viewcode-block" id="WorkerSession.new_page">
 <a class="viewcode-back" href="../../../core.html#chanina.core.worker_session.WorkerSession.new_page">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">new_page</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Page</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">new_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">Page</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Create a new page, overrides the &#39;_current_page&#39;. &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser_context</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span></div>
-
-
-<div class="viewcode-block" id="WorkerSession.close_page">
-<a class="viewcode-back" href="../../../core.html#chanina.core.worker_session.WorkerSession.close_page">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">close_page</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Close the &#39;current_page&#39;.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_page</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_current_page</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">browser_context</span><span class="o">.</span><span class="n">new_page</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="WorkerSession.close">

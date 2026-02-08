@@ -56,7 +56,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#chanina">Chanina</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bootstrapper">Bootstrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-chanina.core.features">Features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.core.features.ChaninaTask"><code class="docutils literal notranslate"><span class="pre">ChaninaTask</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#chanina.core.features.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a></li>
 </ul>
 </li>
@@ -64,9 +63,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#module-chanina.core.worker_session">Worker Session</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession"><code class="docutils literal notranslate"><span class="pre">WorkerSession</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession.close"><code class="docutils literal notranslate"><span class="pre">WorkerSession.close()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession.close_page"><code class="docutils literal notranslate"><span class="pre">WorkerSession.close_page()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession.current_page"><code class="docutils literal notranslate"><span class="pre">WorkerSession.current_page</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession.get_current_page"><code class="docutils literal notranslate"><span class="pre">WorkerSession.get_current_page()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession.new_page"><code class="docutils literal notranslate"><span class="pre">WorkerSession.new_page()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession.playwright"><code class="docutils literal notranslate"><span class="pre">WorkerSession.playwright</span></code></a></li>
 </ul>
@@ -117,15 +113,6 @@
 <section id="module-chanina.core.features">
 <span id="features"></span><h2>Features<a class="headerlink" href="#module-chanina.core.features" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="chanina.core.features.ChaninaTask">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.core.features.</span></span><span class="sig-name descname"><span class="pre">ChaninaTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/core/features.html#ChaninaTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.features.ChaninaTask" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></p>
-<p>Base class for Tasks used by the Chanina app.
-This class is meant to be inherited by the user’s implementation of specific
-base Tasks.</p>
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="chanina.core.features.Feature">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.core.features.</span></span><span class="sig-name descname"><span class="pre">Feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">celery_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/core/features.html#Feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.features.Feature" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -155,27 +142,8 @@ lives.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="chanina.core.worker_session.WorkerSession.close_page">
-<span class="sig-name descname"><span class="pre">close_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/chanina/core/worker_session.html#WorkerSession.close_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.worker_session.WorkerSession.close_page" title="Link to this definition"></a></dt>
-<dd><p>Close the ‘current_page’.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="chanina.core.worker_session.WorkerSession.current_page">
-<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">current_page</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">playwright.sync_api.Page</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#chanina.core.worker_session.WorkerSession.current_page" title="Link to this definition"></a></dt>
-<dd><p>Return the last created page.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.core.worker_session.WorkerSession.get_current_page">
-<span class="sig-name descname"><span class="pre">get_current_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">playwright.sync_api.Page</span></span></span><a class="reference internal" href="_modules/chanina/core/worker_session.html#WorkerSession.get_current_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.worker_session.WorkerSession.get_current_page" title="Link to this definition"></a></dt>
-<dd><p>Return the current_page.
-If required is True, raises an exception if current_page is None</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="chanina.core.worker_session.WorkerSession.new_page">
-<span class="sig-name descname"><span class="pre">new_page</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">playwright.sync_api.Page</span></span></span><a class="reference internal" href="_modules/chanina/core/worker_session.html#WorkerSession.new_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.worker_session.WorkerSession.new_page" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">new_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">playwright.sync_api.Page</span></span></span><a class="reference internal" href="_modules/chanina/core/worker_session.html#WorkerSession.new_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.worker_session.WorkerSession.new_page" title="Link to this definition"></a></dt>
 <dd><p>Create a new page, overrides the ‘_current_page’.</p>
 </dd></dl>
 

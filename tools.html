@@ -51,51 +51,11 @@
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.tools.filters.Filters"><code class="docutils literal notranslate"><span class="pre">Filters</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.filters.Filters.filter_by_attr"><code class="docutils literal notranslate"><span class="pre">Filters.filter_by_attr()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.filters.Filters.filter_by_regex"><code class="docutils literal notranslate"><span class="pre">Filters.filter_by_regex()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.filters.Filters.filter_by_text"><code class="docutils literal notranslate"><span class="pre">Filters.filter_by_text()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.filters.Filters.filter_not_empty"><code class="docutils literal notranslate"><span class="pre">Filters.filter_not_empty()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.filters.Filters.find_all_by_attr"><code class="docutils literal notranslate"><span class="pre">Filters.find_all_by_attr()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.filters.Filters.find_one_by_attr"><code class="docutils literal notranslate"><span class="pre">Filters.find_one_by_attr()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#inspect">Inspect</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.tools.inspect.Inspect"><code class="docutils literal notranslate"><span class="pre">Inspect</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.inspect.Inspect.get_by_content_text"><code class="docutils literal notranslate"><span class="pre">Inspect.get_by_content_text()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.inspect.Inspect.get_by_selector"><code class="docutils literal notranslate"><span class="pre">Inspect.get_by_selector()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#interact">Interact</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.tools.interact.Interact"><code class="docutils literal notranslate"><span class="pre">Interact</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.interact.Interact.accept_cookies"><code class="docutils literal notranslate"><span class="pre">Interact.accept_cookies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.interact.Interact.form_filler"><code class="docutils literal notranslate"><span class="pre">Interact.form_filler()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#navigate">Navigate</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.tools.navigate.Navigate"><code class="docutils literal notranslate"><span class="pre">Navigate</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.navigate.Navigate.goto"><code class="docutils literal notranslate"><span class="pre">Navigate.goto()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.navigate.Navigate.scroller"><code class="docutils literal notranslate"><span class="pre">Navigate.scroller()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#wait">Wait</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.tools.wait.Wait"><code class="docutils literal notranslate"><span class="pre">Wait</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.wait.Wait.wait_for_cookies"><code class="docutils literal notranslate"><span class="pre">Wait.wait_for_cookies()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.wait.Wait.wait_for_dom_element"><code class="docutils literal notranslate"><span class="pre">Wait.wait_for_dom_element()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chanina.tools.wait.Wait.wait_for_js_condition"><code class="docutils literal notranslate"><span class="pre">Wait.wait_for_js_condition()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#filters">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inspect">Inspect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interact">Interact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#navigate">Navigate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wait">Wait</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="default-features.html">Default Features</a></li>
@@ -136,210 +96,22 @@
 <section id="filters">
 <h2>Filters<a class="headerlink" href="#filters" title="Link to this heading"></a></h2>
 <p><em>Filters methods are meant to filter through a list of locators resuling from a find method or native playwright method.</em></p>
-<dl class="py class" id="module-chanina.tools.filters">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.tools.filters.</span></span><span class="sig-name descname"><span class="pre">Filters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Filters are meant to be ‘low level’.
-If you need an advanced and quick way to search for an item, use the ‘find_*’
-methods, which are designed to raise Exceptions and ensure a return.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters.filter_by_attr">
-<span class="sig-name descname"><span class="pre">filter_by_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters.filter_by_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters.filter_by_attr" title="Link to this definition"></a></dt>
-<dd><p>Only keeps locators for which the attribute ‘attr’ either contains or is the value ‘value’.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters.filter_by_regex">
-<span class="sig-name descname"><span class="pre">filter_by_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters.filter_by_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters.filter_by_regex" title="Link to this definition"></a></dt>
-<dd><p>Filters a list of Locators by a regex on their text_content.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters.filter_by_text">
-<span class="sig-name descname"><span class="pre">filter_by_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters.filter_by_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters.filter_by_text" title="Link to this definition"></a></dt>
-<dd><p>Filters a list of Locators by a string on their text_content.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters.filter_not_empty">
-<span class="sig-name descname"><span class="pre">filter_not_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters.filter_not_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters.filter_not_empty" title="Link to this definition"></a></dt>
-<dd><p>Only keeps the locators which have non-empty content_text.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters.find_all_by_attr">
-<span class="sig-name descname"><span class="pre">find_all_by_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters.find_all_by_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters.find_all_by_attr" title="Link to this definition"></a></dt>
-<dd><p>Finds all locators associated to the passed selector that has the ‘text_content’
-in its ‘attr’ attribute.
-To search for any selector type, you can set ‘selector’ to “*”.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.filters.Filters.find_one_by_attr">
-<span class="sig-name descname"><span class="pre">find_one_by_attr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">playwright.sync_api.Locator</span></span></span><a class="reference internal" href="_modules/chanina/tools/filters.html#Filters.find_one_by_attr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.filters.Filters.find_one_by_attr" title="Link to this definition"></a></dt>
-<dd><p>Finds the first element associated to the passed selector that has the ‘text_content’
-in its ‘attr’ attribute.
-To search for any selector type, you can set ‘selector’ to “*”.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="inspect">
 <h2>Inspect<a class="headerlink" href="#inspect" title="Link to this heading"></a></h2>
 <p><em>Inspect methods allow easy search of different kind of elements in a page.</em></p>
-<dl class="py class" id="module-chanina.tools.inspect">
-<dt class="sig sig-object py" id="chanina.tools.inspect.Inspect">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.tools.inspect.</span></span><span class="sig-name descname"><span class="pre">Inspect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/tools/inspect.html#Inspect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.inspect.Inspect" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.inspect.Inspect.get_by_content_text">
-<span class="sig-name descname"><span class="pre">get_by_content_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'div'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/inspect.html#Inspect.get_by_content_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.inspect.Inspect.get_by_content_text" title="Link to this definition"></a></dt>
-<dd><p>Get a list of Locator(s) which contains the ‘text’ arguments.
-Be careful, technically, if you have a span with your text argument,
-inside a div and inside another div, they will all get appended to the list.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>-</em>) – the string that should match.</p></li>
-<li><p><strong>selector</strong> (<em>-</em>) – tag in which the search is made. Can be set to “*” for global search.</p></li>
-<li><p><strong>strict</strong> (<em>-</em>) – if True returns element strictly matching string.</p></li>
-<li><p><strong>n_min</strong> (<em>-</em>) – minimum elements to wait for (raise exception if less)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.inspect.Inspect.get_by_selector">
-<span class="sig-name descname"><span class="pre">get_by_selector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">playwright.sync_api.Locator</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/chanina/tools/inspect.html#Inspect.get_by_selector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.inspect.Inspect.get_by_selector" title="Link to this definition"></a></dt>
-<dd><p>Get all loaded items on the page with the specified selector.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="interact">
 <h2>Interact<a class="headerlink" href="#interact" title="Link to this heading"></a></h2>
 <p><em>Interact methods offers a multitude of ways to interact with the DOM without the constraint of boilerplate code.</em></p>
-<dl class="py class" id="module-chanina.tools.interact">
-<dt class="sig sig-object py" id="chanina.tools.interact.Interact">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.tools.interact.</span></span><span class="sig-name descname"><span class="pre">Interact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/tools/interact.html#Interact"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.interact.Interact" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>tools for interacting with the page.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.interact.Interact.accept_cookies">
-<span class="sig-name descname"><span class="pre">accept_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">case_sensitive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">click_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'button'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/chanina/tools/interact.html#Interact.accept_cookies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.interact.Interact.accept_cookies" title="Link to this definition"></a></dt>
-<dd><p>Helper to bypass the “accept cookies” pop ups.
-If no ‘text’ is specified, then it clicks every buttons that would be a good candidate.
-If text is specified but the buttons is not found an error will be raised.
-If the “text” gets multiple candidates, then they will all be clicked
-unless the “recursive” parameter is changed to False.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>-</em>) – the text that identifies the accept button.</p></li>
-<li><p><strong>case_sensitive</strong> (<em>-</em>) – wether or not the search is case sensitive.</p></li>
-<li><p><strong>click_count</strong> (<em>-</em>) – as those popups appears at dom loading, you might find
-cases where clicking multiple times gets the focus correctly.</p></li>
-<li><p><strong>recursive</strong> (<em>-</em>) – wether or not we want to click on every candidate buttons.</p></li>
-<li><p><strong>selector</strong> (<em>-</em>) – Chose in which selectors the button can be found with.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.interact.Interact.form_filler">
-<span class="sig-name descname"><span class="pre">form_filler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">form_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/chanina/tools/interact.html#Interact.form_filler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.interact.Interact.form_filler" title="Link to this definition"></a></dt>
-<dd><p>Forms are filled by passing a dict.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>form_data</strong> (<em>-</em>) – form fields are a dict
-with key = <em>field to fill</em>, and value is a dict.</p></li>
-<li><p><strong>attribute</strong> (<em>-</em>) – the HTML attribute identifier. Default to ‘id’.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="navigate">
 <h2>Navigate<a class="headerlink" href="#navigate" title="Link to this heading"></a></h2>
 <p><em>Navigates methods offers a multitude of ways to go to other pages, but also load more content inside a page by scrolling an element.</em></p>
-<p id="module-chanina.tools.navigate">tools for navigating a page.
-functions do not return anything but make the current_page to the desired state.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="chanina.tools.navigate.Navigate">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.tools.navigate.</span></span><span class="sig-name descname"><span class="pre">Navigate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/tools/navigate.html#Navigate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.navigate.Navigate" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.navigate.Navigate.goto">
-<span class="sig-name descname"><span class="pre">goto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_redirect</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'load'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'domcontentloaded'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'networkidle'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'networkidle'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/chanina/tools/navigate.html#Navigate.goto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.navigate.Navigate.goto" title="Link to this definition"></a></dt>
-<dd><p>Go to the desired url and assure the page is fully loaded in a timely manner.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<em>-</em>) – url to go to.</p></li>
-<li><p><strong>timeout</strong> (<em>-</em>) – max timeout to wait for the page to load (ms).</p></li>
-<li><p><strong>allow_redirect</strong> (<em>-</em>) – If set to False, raise Exception if page is redirected.</p></li>
-<li><p><strong>wait_event</strong> (<em>-</em>) – event to wait until.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.navigate.Navigate.scroller">
-<span class="sig-name descname"><span class="pre">scroller</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scroller_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'y'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'x'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_scrolls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/chanina/tools/navigate.html#Navigate.scroller"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.navigate.Navigate.scroller" title="Link to this definition"></a></dt>
-<dd><p>scroll all the way down a scroll bar.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>scroller_depth</strong> (<em>-</em>) – which depth should the scrollbar be at, 0 being the full doc, 1 the first
-scrollable container inside the full doc, 2 the second … etc.</p></li>
-<li><p><strong>axis</strong> (<em>-</em>) – scrolling axis.</p></li>
-<li><p><strong>timeout</strong> (<em>-</em>) – for dynamically generated content.
-If a value is set, waits ‘reload_timeout’ ms and check if scroll_bar is still maxed.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="wait">
 <h2>Wait<a class="headerlink" href="#wait" title="Link to this heading"></a></h2>
 <p><em>Timing is a huge pain to handle when using a browser’s driver. This Wait module tries to alliviate this pain with more precise methods.</em></p>
-<dl class="py class" id="module-chanina.tools.wait">
-<dt class="sig sig-object py" id="chanina.tools.wait.Wait">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.tools.wait.</span></span><span class="sig-name descname"><span class="pre">Wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/tools/wait.html#Wait"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.wait.Wait" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.wait.Wait.wait_for_cookies">
-<span class="sig-name descname"><span class="pre">wait_for_cookies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/chanina/tools/wait.html#Wait.wait_for_cookies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.wait.Wait.wait_for_cookies" title="Link to this definition"></a></dt>
-<dd><p>Wait for a cookie to be added to the browser.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.wait.Wait.wait_for_dom_element">
-<span class="sig-name descname"><span class="pre">wait_for_dom_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/chanina/tools/wait.html#Wait.wait_for_dom_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.wait.Wait.wait_for_dom_element" title="Link to this definition"></a></dt>
-<dd><p>Wait for a DOM element to appear.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="chanina.tools.wait.Wait.wait_for_js_condition">
-<span class="sig-name descname"><span class="pre">wait_for_js_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">script</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/chanina/tools/wait.html#Wait.wait_for_js_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.tools.wait.Wait.wait_for_js_condition" title="Link to this definition"></a></dt>
-<dd><p>Wait for a JS condition to become true.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 

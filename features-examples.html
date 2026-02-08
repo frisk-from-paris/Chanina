@@ -93,20 +93,6 @@
 <section id="a-basic-feature">
 <h2>A basic feature<a class="headerlink" href="#a-basic-feature" title="Link to this heading"></a></h2>
 <p><em>Example of a feature that will open a new page and tried to navigate to google.com</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">feature</span><span class="p">(</span><span class="s1">&#39;check-google&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">check_google</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="n">WorkerSession</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This is just a basic example on how your workflow using chanina would look like.</span>
-<span class="sd">    Here we are just checking if google is accessible.</span>
-<span class="sd">    Every feature has a &#39;WorkerSession&#39; passed to it, and can also receive optional &#39;args&#39;.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">session</span><span class="o">.</span><span class="n">new_page</span><span class="p">()</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">session</span><span class="o">.</span><span class="n">navigate</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="s2">&quot;https://google.com&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: could not access google.com : </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 <p><em>Running the celery worker …</em></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>celery<span class="w"> </span>-A<span class="w"> </span>app:celery<span class="w"> </span>worker
 </pre></div>
