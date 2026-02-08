@@ -16,7 +16,6 @@ part of your tests suite or data extraction mecanisms.
 - **Playwright session management**: `WorkerSession` Inject the Playwright context, pages, and utility tools among all features executed in a worker.
 - **Celery based task system**: Enjoy Celery's full functionnlities and configs for tasks with the `@feature` decorator.
 - **Complex workflows**: support for chains and groups of tasks, with sequences managed automatically.
-- **Smart tools for Playwright**: navigate, inspect, interact and wait modules gathers methods that facilitates implementing routines.
 - **CLI**: run workflows or tasks from the terminal.
 - **Isolated browser profiles**: manage profiles to prevent conflicts between workers and the main playwright processes.
 

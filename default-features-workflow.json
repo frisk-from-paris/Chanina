@@ -2,17 +2,17 @@
   "steps": [
     {
       "identifier": "chanina.list_features",
-      "args": {},
+      "config": {},
       "flow_type": "chain"
     },
     {
       "identifier": "chanina.new_page",
-      "args": {},
+      "config": {},
       "flow_type": "chain"
     },
     {
       "identifier": "chanina.close_page",
-      "args": {},
+      "config": {},
       "flow_type": "chain"
     }
 

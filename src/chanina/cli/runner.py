@@ -62,28 +62,28 @@ def import_application_object(path: str) -> ChaninaApplication:
     return chanina_app
 
 
-def import_arguments(arguments: list[str]):
+def import_config(config: list[str]):
     """
     Parse the list of nargs passed to the cli and makes it a dict of args.
     nargs needs to be passed in the format: -r key=value key2=value2.
     Exceptions are raised if anything is not correct.
     """
-    args = {}
-    if not arguments:
-        return args
+    conf = {}
+    if not config:
+        return conf
 
-    for kv in arguments:
+    for kv in config:
         if not "=" in kv:
             continue
         k, v = kv.split("=")
         if not k or not v:
             raise ValueError(f"Arguments passed for flag '-r' but could not be turned into a valid dict. ({kv})")
-        args[k] = v
+        conf[k] = v
 
-    if not args:
+    if not conf:
         raise KeyError("Arguments passed for flag '-r' got parsed into an empty dictionnary.")
 
-    return args
+    return conf
 
 
 def add_arguments(argparser: ArgumentParser):
@@ -107,7 +107,7 @@ def add_arguments(argparser: ArgumentParser):
     argparser.add_argument(
         "--celery",
         "-c",
-        help="Runs the celery app",
+        help="Runs the celery app, every var=value after this flag will be passed to celery.",
         required=False,
         nargs="*"
     )
@@ -119,9 +119,9 @@ def add_arguments(argparser: ArgumentParser):
         type=int
     )
     argparser.add_argument(
-        "--arguments",
-        "-r",
-        help="Only in -t mode. Additionnal args to pass to the task. Warning: similar keys in the workflow will be overwritten.",
+        "--config",
+        "-g",
+        help="Only in -t mode. A config to pass to the task. Warning: similar keys in the workflow will be overwritten.",
         nargs="*"
     )
 
@@ -133,7 +133,7 @@ class Runner:
         workflow: dict | None,
         task_identifier: str = "",
         number_of_runs: int = 1,
-        additionnal_args: dict = {}
+        config: dict = {}
     ) -> None:
         self.app = app
         self.workflow = workflow
@@ -142,7 +142,7 @@ class Runner:
             self.app.features, workflow
         ) if workflow else None
         self.number_of_runs = number_of_runs
-        self.additionnal_args = additionnal_args
+        self.config = config
 
         self._last_task_ids = []
 
@@ -158,7 +158,7 @@ class Runner:
 
     def _run_task(self):
         feature = self.app.features[self.task_identifier]
-        task = feature.task.s(args=self.additionnal_args)
+        task = feature.task.s(config=self.config)
         task.apply_async()
 
     def _run_workflow(self):
@@ -175,6 +175,7 @@ class Runner:
 
 def run_celery(app: Celery,command: str = "worker", **options):
     """
+    run the celery worker replacing every k=v args passed in the cli as --k=v or --k if v is bool.
     """
     argv = [command]
 
@@ -203,20 +204,20 @@ def run():
     celery_args = args.celery
     task_identifier = args.task
     number_of_runs = args.number_of_runs
-    arguments_as_list = args.arguments
+    config_as_list = args.config
 
     # First we check if the command is for a celery worker.
     if isinstance(celery_args, list):
-        args = import_arguments(celery_args)
+        args = import_config(celery_args)
         run_celery(app.celery, **args)
         return
 
-    # Transform arguments data into the needed components for the run.
-    arguments = import_arguments(arguments_as_list)
+    # Transform config into the needed components for the run.
+    config = import_config(config_as_list)
     workflow = import_workflow_file(workflow_file) if workflow_file else None
 
     # Create a runner
-    runner = Runner(app, workflow, task_identifier, number_of_runs, arguments)
+    runner = Runner(app, workflow, task_identifier, number_of_runs, config)
     runner.run()
 
 

@@ -15,7 +15,7 @@ class Sequencer:
     def sequence(self):
         return self._sequence
 
-    def add(self, step: dict, feature: Feature, args: dict = {}):
+    def add(self, step: dict, feature: Feature, config: dict = {}):
         """
         To add the step to the sequence, we need to check its content: 
             - identifier needs to be unique
@@ -23,7 +23,7 @@ class Sequencer:
             - flow_id if unspecified will be default.{flow_type}, else it will be on its own key in the register.
         Steps are added in the order they are written in the yaml file, depending on their own flow_id.
         """
-        args = args
+        config = config
         name = step["identifier"]
         flow_type = step["flow_type"]
         if not flow_type in ["chain", "group"]:
@@ -32,7 +32,7 @@ class Sequencer:
         flow_id = step.get("flow_id", None)
         flow_id = f"{flow_id}.{flow_type}" if flow_id else f"default.{flow_type}"
 
-        task = feature.task.s(args=args)
+        task = feature.task.s(config=config)
         self.tasks_by_flow_id.setdefault(flow_id, [])
         self.tasks_by_flow_id[flow_id].append(task)
         self.registry[name] = task
@@ -94,15 +94,15 @@ class Bootstrapper:
                 continue
             # If the step needs multiple instances we build it here.
             if step["identifier"] in self.workflow["instances"].keys():
-                initial_args = step.get("args", {}) or {}
-                for args in self.workflow["instances"][step["identifier"]]:
+                initial_config = step.get("config", {}) or {}
+                for config in self.workflow["instances"][step["identifier"]]:
                     # 'instances' are dicts of args with which we re-run the task.
-                    args.update(initial_args)
-                    self.sequencer.add(step, feature, args)
+                    config.update(initial_config)
+                    self.sequencer.add(step, feature, config)
             # Otherwise we build the task here.
             else:
                 # 'step' is passed as 'args' cause it does contain the args at the key 'args'.
-                all_args = step.get("args", {})
-                self.sequencer.add(step, feature, all_args)
+                all_configs = step.get("config", {})
+                self.sequencer.add(step, feature, all_configs)
         self.sequencer.build()
         self._built = True

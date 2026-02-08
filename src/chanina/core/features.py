@@ -1,16 +1,5 @@
 from typing import Callable
 
-import celery
-
-
-class ChaninaTask(celery.Task):
-    """
-    Base class for Tasks used by the Chanina app.
-    This class is meant to be inherited by the user's implementation of specific
-    base Tasks.
-    """
-    ...
-
 
 class Feature:
     """
@@ -27,8 +16,7 @@ class Feature:
         self.app = app
         self.func = func
         self.feature_id = feature_id
-        self.celery_kwargs = celery_kwargs
-        
+        self.celery_kwargs = celery_kwargs 
         self.task = self._register_as_task()
 
     def _register_as_task(self):
@@ -38,6 +26,10 @@ class Feature:
             **self.celery_kwargs
         )
         def _task(*args, **kwargs):
-            args = () if None in args else args
-            return self.func(*args, self.app.worker_session, kwargs.get("args"))
+            parsed_args = []
+            for arg in args:
+                if arg is not None:
+                    parsed_args.append(arg)
+            args = tuple(parsed_args)
+            return self.func(*args, self.app.worker_session, kwargs.get("config"))
         return _task
