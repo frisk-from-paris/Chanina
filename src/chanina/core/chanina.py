@@ -103,15 +103,14 @@ class ChaninaApplication:
         """
         with self.redis.lock(self.redlock,timeout=30, blocking_timeout=45):
             logging.info("Locking to start the session ...")
-            profile = self._user_profile_path
-            if profile:
-                self._in_use_profile_path = init_profile(profile)
+            if self._user_profile_path:
+                self._in_use_profile_path = init_profile(self._user_profile_path)
             self.worker_session = WorkerSession(
                 caller_path=self._caller_path,
                 headless=self._headless,
                 browser_name=self._browser_name,
                 app=self,
-                profile=profile
+                profile=self._in_use_profile_path
             )
             logging.info(f"WorkerSession initialized: {self._in_use_profile_path}")
 
