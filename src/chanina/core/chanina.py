@@ -11,15 +11,15 @@ import logging
 from pathlib import Path
 from typing import Callable
 
-from chanina.core.features import Feature
-from chanina.core.worker_session import WorkerSession
-from chanina.default_features import build_default_features
-
 from celery import Celery, signals
 from redis import Redis
 
+from chanina.core.libretti import Libretto
+from chanina.core.worker_session import WorkerSession
+from chanina.default_libretti import build_default_libretti
 
-def init_profile(profile_path: str):
+
+def init_profile(profile_path: str) -> str:
     """
     A browser user profile can only be used by 1 process at the time.
     It's easier for the user not to bother with that, and let the ChaninaApplication
@@ -63,37 +63,51 @@ class ChaninaApplication:
     def __init__(
         self,
         caller_path: str,
-        backend: str,
-        broker: str,
-        redis_host: str,
-        redis_port: int,
-        user_profile_path: str = "",
-        headless: bool = False,
+        backend: str = "redis://localhost:6379",
+        broker: str = "amqp://localhost:5672",
+        redis_host: str = "localhost",
+        redis_port: int = 6379,
+        playwright_enabled: bool = True,
+        user_profile_path: str = ".",
+        headless: bool = True,
         browser_name: str = "firefox",
         celery_config: dict = {}
     ) -> None:
         # Inside the celery worker process the __file__ might be dir.module
         caller_path = str(Path(caller_path).resolve().parent)
 
-        self._in_use_profile_path = None
-        self.worker_session = None
-        self.features = {}
-
         self.redis = Redis(host=redis_host, port=redis_port)
-        self.redlock = f"lock:{caller_path}"
+        self.redlock = f"lock:chanina:{caller_path}"
         self.celery = Celery("chanina", broker=broker, backend=backend)
         self.celery.config_from_object(celery_config)
 
+        self._in_use_profile_path = ""
+        self._worker_session = None
+        self._libretti = {}
         self._caller_path = caller_path
         self._headless = headless
         self._browser_name = browser_name
         self._user_profile_path = user_profile_path
+        self._playwright_enabled = playwright_enabled
 
-        signals.worker_process_init.connect(self._init_worker)
-        signals.worker_process_shutdown.connect(self._shutdown_worker)
+        if playwright_enabled:
+            signals.worker_process_init.connect(self._init_worker)
+            signals.worker_process_shutdown.connect(self._shutdown_worker)
 
         # After the definition of self.features and self.celery, we build the default features.
-        build_default_features(self)
+        build_default_libretti(self)
+
+    @property
+    def libretti(self):
+        return self._libretti
+
+    @property
+    def worker_session(self):
+        return self._worker_session
+
+    @property
+    def playwright_enabled(self):
+        return self._playwright_enabled
 
     def _init_worker(self, **_):
         """
@@ -123,7 +137,7 @@ class ChaninaApplication:
             self.worker_session = None
         logging.info("WorkerSession closed")
 
-    def feature(self, feature_id: str, **kwargs) -> Callable:
+    def libretto(self, title: str, **kwargs) -> Callable:
         """
         Decorator for feature to be added to the main
         loop.
@@ -131,12 +145,12 @@ class ChaninaApplication:
         as the "command name" that will trigger the feature.
         """
         def decorator(func: Callable) -> Callable:
-            feature = Feature(
+            libretto = Libretto(
                 app=self,
                 func=func,
-                feature_id=feature_id,
+                title=title,
                 **kwargs
             )
-            self.features[feature_id] = feature 
+            self.libretti[title] = libretto
             return func
         return decorator

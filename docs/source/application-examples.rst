@@ -18,7 +18,7 @@ Declaring an app
     $ python -m chanina -a path_to_app:app
 
 
-*Running a default feature as a single task.*
+*Running a default libretto as a single task.*
 
 .. code-block:: bash
 

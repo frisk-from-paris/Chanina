@@ -24,8 +24,8 @@ class ColorFormatter(logging.Formatter):
         formatted = super().format(record)
         return f"{color}{formatted}{self.RESET}"
 
-
 @signals.after_setup_logger.connect
+
 def setup_logging(logger, *_, **__):
     for handler in logger.handlers:
         handler.setFormatter(
