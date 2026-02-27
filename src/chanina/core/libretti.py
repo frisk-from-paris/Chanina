@@ -28,11 +28,17 @@ class Libretto:
         def _task(*args, **kwargs):
             parsed_args = []
             for arg in args:
-                if arg is not None:
+                if arg:
                     parsed_args.append(arg)
             args = tuple(parsed_args)
             if self.app.playwright_enabled:
-                return self.func(*args, self.app.worker_session, kwargs.get("config"))
+                if args:
+                    return self.func(*args, self.app.worker_session, kwargs)
+                else:
+                    return self.func(self.app.worker_session, kwargs)
             else:
-                return self.func(*args, None, kwargs.get("config"))
+                if args:
+                    return self.func(*args, kwargs)
+                else:
+                    return self.func(kwargs)
         return _task
