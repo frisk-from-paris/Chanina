@@ -100,35 +100,9 @@
 <section id="default-features">
 <h2>Default features<a class="headerlink" href="#default-features" title="Link to this heading"></a></h2>
 <p><em>Every ChaninaAppplication instance comes with default features registered that you can find below</em></p>
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">chanina.default_features.</span></span><span class="sig-name descname"><span class="pre">chanina_new_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#chanina.core.worker_session.WorkerSession" title="chanina.core.worker_session.WorkerSession"><span class="pre">WorkerSession</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/default_features.html#chanina_new_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Open a new_page on the current session. This changes the ‘current_page’
-of the session for any other tasks that will be ran after.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">chanina.default_features.</span></span><span class="sig-name descname"><span class="pre">chanina_close_page</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#chanina.core.worker_session.WorkerSession" title="chanina.core.worker_session.WorkerSession"><span class="pre">WorkerSession</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/default_features.html#chanina_close_page"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Close the current_page of the session.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">chanina.default_features.</span></span><span class="sig-name descname"><span class="pre">chanina_list_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="core.html#chanina.core.worker_session.WorkerSession" title="chanina.core.worker_session.WorkerSession"><span class="pre">WorkerSession</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/default_features.html#chanina_list_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>print a dictionnary of the features.</p>
-</dd></dl>
-
 <hr class="docutils" />
 <section id="object-s-reference-s">
 <h3>Object(s) Reference(s)<a class="headerlink" href="#object-s-reference-s" title="Link to this heading"></a></h3>
-<dl class="py class">
-<dt class="sig sig-object py">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.core.features.</span></span><span class="sig-name descname"><span class="pre">Feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">celery_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/core/features.html#Feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>The Feature object is the interface that allows users to create a function with
-access to the playwright context that can be treated as a celery Task.</p>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.core.worker_session.</span></span><span class="sig-name descname"><span class="pre">WorkerSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">caller_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headless</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">browser_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/core/worker_session.html#WorkerSession"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>

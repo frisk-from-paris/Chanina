@@ -55,10 +55,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Core</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#chanina">Chanina</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#bootstrapper">Bootstrapper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-chanina.core.features">Features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#chanina.core.features.Feature"><code class="docutils literal notranslate"><span class="pre">Feature</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#runner">Runner</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-chanina.core.worker_session">Worker Session</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#chanina.core.worker_session.WorkerSession"><code class="docutils literal notranslate"><span class="pre">WorkerSession</span></code></a><ul>
@@ -110,16 +107,8 @@
 <section id="bootstrapper">
 <h2>Bootstrapper<a class="headerlink" href="#bootstrapper" title="Link to this heading"></a></h2>
 </section>
-<section id="module-chanina.core.features">
-<span id="features"></span><h2>Features<a class="headerlink" href="#module-chanina.core.features" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="chanina.core.features.Feature">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">chanina.core.features.</span></span><span class="sig-name descname"><span class="pre">Feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">celery_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/chanina/core/features.html#Feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#chanina.core.features.Feature" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The Feature object is the interface that allows users to create a function with
-access to the playwright context that can be treated as a celery Task.</p>
-</dd></dl>
-
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 </section>
 <section id="runner">
 <h2>Runner<a class="headerlink" href="#runner" title="Link to this heading"></a></h2>
