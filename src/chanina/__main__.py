@@ -116,7 +116,7 @@ def run():
     else:
         # Transform config into the needed components for the run.
         config = import_config(config_as_list)
-        app.libretti[title](config).apply_async()
+        app.libretti[title].s(config).apply_async()
 
 if __name__ == "__main__":
     run()
