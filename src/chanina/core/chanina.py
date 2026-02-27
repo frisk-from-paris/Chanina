@@ -119,7 +119,7 @@ class ChaninaApplication:
             logging.info("Locking to start the session ...")
             if self._user_profile_path:
                 self._in_use_profile_path = init_profile(self._user_profile_path)
-            self.worker_session = WorkerSession(
+            self._worker_session = WorkerSession(
                 caller_path=self._caller_path,
                 headless=self._headless,
                 browser_name=self._browser_name,
@@ -132,9 +132,9 @@ class ChaninaApplication:
         """ Deleted profiles and close session at shutdown. """
         if self._in_use_profile_path:
             remove_profile(self._in_use_profile_path)
-        if self.worker_session:
-            self.worker_session.close()
-            self.worker_session = None
+        if self._worker_session:
+            self._worker_session.close()
+            self._worker_session = None
         logging.info("WorkerSession closed")
 
     def libretto(self, title: str, **kwargs) -> Callable:
