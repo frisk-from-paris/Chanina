@@ -1,6 +1,6 @@
 [project]
 name = "chanina"
-version = "0.4.2"
+version = "0.4.4"
 description = " Chanina is a Python application that helps your playwright to build the best libretti."
 authors = [
     {name = "Leo Hehlen",email = "leo.hehlen@pc-rtx.com"}
@@ -21,7 +21,7 @@ packages = [{include = "chanina", from = "src"}]
 [tool.poetry.scripts]
 tests = "tests.tests:run"
 workflow = "tests.workflow:run"
-cli = "src.chanina.cli.runner:run"
+cli = "src.chanina.__main__:run"
 docs = "build_docs:run"
 
 [tool.poetry.dependencies]
