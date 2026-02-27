@@ -93,7 +93,6 @@ def run_worker(app: ChaninaApplication, command: str = "worker", **options):
     if app.playwright_enabled:
         argv.append("--concurrency=1")
 
-    argv = list(set(argv))
     app.celery.start(argv)
 
 
